@@ -1,0 +1,4 @@
+node_modules/
+*.log
+outputs/*.inspect.ndjson
+outputs/*_thumb.png

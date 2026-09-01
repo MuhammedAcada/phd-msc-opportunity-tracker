@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PhD/MSc Opportunity Tracker</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #14213d;
+      --muted: #526070;
+      --line: #d6dde6;
+      --panel: #ffffff;
+      --soft: #f4f7fb;
+      --accent: #0f766e;
+      --accent-2: #8a4b0f;
+      --danger: #a61b35;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: #eef3f8;
+      line-height: 1.45;
+    }
+    header {
+      background: #102542;
+      color: white;
+      padding: 28px clamp(16px, 4vw, 56px);
+    }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 4vw, 46px);
+      letter-spacing: 0;
+    }
+    header p {
+      margin: 0;
+      max-width: 920px;
+      color: #d9e5f2;
+      font-size: 16px;
+    }
+    main {
+      width: min(1380px, calc(100% - 32px));
+      margin: 24px auto 48px;
+    }
+    .toolbar, section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .metric {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 76px;
+    }
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .metric strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 26px;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    input, select, button {
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: white;
+      color: var(--ink);
+      padding: 8px 10px;
+      font: inherit;
+    }
+    input { min-width: min(340px, 100%); }
+    button, a.button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+      text-decoration: none;
+      cursor: pointer;
+      min-height: 38px;
+      border-radius: 6px;
+      padding: 8px 12px;
+    }
+    a.secondary {
+      background: #334155;
+      border-color: #334155;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      table-layout: fixed;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+      word-break: break-word;
+      font-size: 14px;
+    }
+    th {
+      background: #e6edf5;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #334155;
+    }
+    td small {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      max-height: 58px;
+      overflow: hidden;
+    }
+    .score {
+      display: inline-flex;
+      min-width: 34px;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 3px 8px;
+      background: #e8f3f1;
+      color: #075e54;
+      font-weight: 700;
+      margin-right: 6px;
+    }
+    .priority {
+      display: inline-flex;
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 12px;
+      font-weight: 700;
+      background: #eef2f7;
+    }
+    .priority.high { color: #075e54; }
+    .priority.medium { color: var(--accent-2); }
+    .priority.low { color: var(--danger); }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .step {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: var(--soft);
+    }
+    .step strong { display: block; margin-bottom: 6px; }
+    code {
+      background: #eef2f7;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+    .note {
+      color: var(--muted);
+      margin: 8px 0 0;
+    }
+    @media (max-width: 900px) {
+      .metrics, .steps { grid-template-columns: 1fr; }
+      table { table-layout: auto; }
+      th:nth-child(2), td:nth-child(2), th:nth-child(4), td:nth-child(4), th:nth-child(6), td:nth-child(6) { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PhD/MSc Opportunity Tracker</h1>
+    <p>Daily public-source lead finder for funded graduate opportunities in medicinal chemistry, drug discovery, computational chemistry, health informatics, AI for health, and health data engineering. LinkedIn remains manual capture only.</p>
+  </header>
+  <main>
+    <div class="metrics">
+      <div class="metric"><span>Total leads</span><strong>1</strong></div>
+      <div class="metric"><span>High priority</span><strong>0</strong></div>
+      <div class="metric"><span>Medium priority</span><strong>1</strong></div>
+      <div class="metric"><span>Latest run</span><strong>2026-09-01</strong></div>
+    </div>
+
+    <div class="toolbar">
+      <div class="controls">
+        <input id="search" type="search" placeholder="Filter by title, field, institution, funding, snippet">
+        <select id="priority">
+          <option value="">All priorities</option>
+          <option>High</option>
+          <option>Medium</option>
+          <option>Low</option>
+        </select>
+        <select id="field">
+          <option value="">All fields</option>
+          <option>AI for health</option>
+        </select>
+        <a class="button" href="leads.csv" download>Download leads CSV</a>
+        <a class="button secondary" href="linkedin_search_urls.csv" download>LinkedIn searches CSV</a>
+      </div>
+      <p class="note">Generated at 2026-09-01T10:33:02.048Z. The daily run updates the JSON/CSV data without duplicating existing URLs.</p>
+    </div>
+
+    <section>
+      <h2>Lead Table</h2>
+      <table id="lead-table">
+        <thead>
+          <tr>
+            <th style="width: 34%;">Opportunity</th>
+            <th style="width: 14%;">Institution</th>
+            <th style="width: 13%;">Field</th>
+            <th style="width: 12%;">Funding</th>
+            <th style="width: 10%;">Fit</th>
+            <th style="width: 9%;">Deadline</th>
+            <th style="width: 8%;">Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-priority="Medium" data-field="AI for health">
+    <td><strong>PhD Studentship: Developing Fair and Robust Cancer Risk Prediction Models Using Health Data</strong><small>PhD Studentship: Developing Fair and Robust Cancer Risk Prediction Models Using Health Data Department of Public Health and Primary Care - Cardiovascular Epidemiology Unit University of Cambridge Location: Cambridge Salary: £20,780 Date Placed: 17 Jun Closes 01 Oct Save</small></td>
+    <td>University of Cambridge</td>
+    <td>AI for health</td>
+    <td>Funded / verify</td>
+    <td><span class="score">65</span><span class="priority medium">Medium</span></td>
+    <td>2026-10-01</td>
+    <td><a href="https://www.jobs.ac.uk/job/DRY050/phd-studentship-developing-fair-and-robust-cancer-risk-prediction-models-using-health-data" target="_blank" rel="noreferrer">Open source</a></td>
+  </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Manual LinkedIn Workflow</h2>
+      <div class="steps">
+        <div class="step"><strong>1. Search manually</strong>Open LinkedIn, paste one Boolean query from <code>linkedin_boolean_searches.md</code>, then filter to Posts for openings or People for professors/students.</div>
+        <div class="step"><strong>2. Copy the useful link</strong>For a post, open the post menu and choose copy link, or open the post and copy the URL from the address bar. For a profile, open the profile and copy the address-bar URL.</div>
+        <div class="step"><strong>3. Store the lead</strong>Add the URL to the workbook's <code>Manual LinkedIn Capture</code> sheet, or edit <code>data/manual_linkedin_capture.csv</code> in GitHub and commit the new row.</div>
+      </div>
+      <p class="note">Static GitHub Pages cannot save form edits by itself. The safe live workflow is to paste selected LinkedIn links into the repo CSV or your local workbook, then move strong leads into outreach.</p>
+    </section>
+  </main>
+  <script>
+    const search = document.querySelector("#search");
+    const priority = document.querySelector("#priority");
+    const field = document.querySelector("#field");
+    const rows = [...document.querySelectorAll("#lead-table tbody tr")];
+    function applyFilters() {
+      const q = search.value.trim().toLowerCase();
+      const p = priority.value;
+      const f = field.value;
+      for (const row of rows) {
+        const text = row.innerText.toLowerCase();
+        const visible = (!q || text.includes(q)) && (!p || row.dataset.priority === p) && (!f || row.dataset.field === f);
+        row.style.display = visible ? "" : "none";
+      }
+    }
+    search.addEventListener("input", applyFilters);
+    priority.addEventListener("change", applyFilters);
+    field.addEventListener("change", applyFilters);
+  </script>
+</body>
+</html>

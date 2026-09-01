@@ -1,0 +1,15 @@
+{
+  "name": "phd-msc-opportunity-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Public-source PhD/MSc opportunity finder and manual LinkedIn capture dashboard.",
+  "scripts": {
+    "find:leads": "node scripts/find_leads.mjs",
+    "build:site": "node scripts/build_site.mjs",
+    "run:daily": "node scripts/find_leads.mjs && node scripts/build_site.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
