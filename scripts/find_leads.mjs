@@ -72,6 +72,48 @@ const searchProfiles = [
   },
 ];
 
+const eastAsiaInstitutions = [
+  "Seoul National University",
+  "KAIST",
+  "Yonsei University",
+  "Korea University",
+  "POSTECH",
+  "Sungkyunkwan University",
+  "Hanyang University",
+  "Ulsan National Institute of Science and Technology",
+  "GIST",
+  "Kyung Hee University",
+  "University of Tokyo",
+  "Kyoto University",
+  "Osaka University",
+  "Tohoku University",
+  "Nagoya University",
+  "Kyushu University",
+  "Hokkaido University",
+  "University of Tsukuba",
+  "Institute of Science Tokyo",
+  "Okinawa Institute of Science and Technology",
+];
+
+const eastAsiaSearchProfiles = eastAsiaInstitutions.flatMap((school) => [
+  {
+    field: "drug discovery",
+    query: `"${school}" ("PhD" OR "doctoral" OR "graduate student") ("drug discovery" OR "medicinal chemistry" OR "pharmaceutical sciences")`,
+    siteQuery: `${school} PhD doctoral graduate student drug discovery medicinal chemistry pharmaceutical sciences`,
+    level: "PhD",
+    sources: ["Google News", "Bing News"],
+  },
+  {
+    field: "health informatics",
+    query: `"${school}" ("PhD" OR "doctoral" OR "graduate student") ("health informatics" OR "digital health" OR "AI for health" OR "health data")`,
+    siteQuery: `${school} PhD doctoral graduate student health informatics digital health AI health data`,
+    level: "PhD",
+    sources: ["Google News", "Bing News"],
+  },
+]);
+
+const allSearchProfiles = [...searchProfiles, ...eastAsiaSearchProfiles];
+
 const publicSources = [
   {
     name: "Google News",
@@ -92,11 +134,6 @@ const publicSources = [
     name: "EURAXESS",
     kind: "html",
     url: (_query, profile) => `https://euraxess.ec.europa.eu/jobs/search?keywords=${encodeURIComponent(profile.siteQuery || profile.query.replaceAll('"', ""))}`,
-  },
-  {
-    name: "FindAPhD",
-    kind: "html",
-    url: (_query, profile) => `https://www.findaphd.com/phds/?Keywords=${encodeURIComponent(profile.siteQuery || profile.query.replaceAll('"', ""))}`,
   },
 ];
 
@@ -120,6 +157,20 @@ const scoringTerms = {
     "pharmaceutical",
   ],
   contact: ["email", "supervisor", "professor", "apply", "application"],
+  opportunity: [
+    "studentship",
+    "position",
+    "opportunity",
+    "opening",
+    "vacancy",
+    "funded",
+    "scholarship",
+    "apply",
+    "application",
+    "doctoral candidate",
+    "graduate student position",
+    "research assistantship",
+  ],
 };
 
 function decodeEntities(value) {
@@ -275,8 +326,9 @@ function isRelevant(text) {
   const lower = text.toLowerCase();
   const hasLevel = scoringTerms.levels.some((term) => lower.includes(term));
   const hasField = scoringTerms.profile.some((term) => lower.includes(term));
-  const rejects = ["postdoctoral", "post-doc", "post doc", "lecturer", "professor job", "teacher"];
-  return hasLevel && hasField && !rejects.some((term) => lower.includes(term));
+  const hasOpportunity = scoringTerms.opportunity.some((term) => lower.includes(term));
+  const rejects = ["postdoctoral", "post-doc", "post doc", "lecturer", "professor job", "teacher", "weekly rundown", "workforce exodus"];
+  return hasLevel && hasField && hasOpportunity && !rejects.some((term) => lower.includes(term));
 }
 
 async function fetchText(url) {
@@ -428,6 +480,17 @@ function candidateLead({ source, profile, title, url, snippet }) {
   };
 }
 
+function existingLeadStillValid(lead) {
+  const source = { name: lead.source || "" };
+  const title = lead.role_or_title || "";
+  const url = lead.official_page_url || lead.profile_or_post_url || "";
+  const text = `${title} ${lead.evidence_snippet || ""}`;
+  if (!sourceAllowsUrl(source, url, title)) return false;
+  if (!isRelevant(text)) return false;
+  if (hasExpiredDeadline(lead.deadline)) return false;
+  return true;
+}
+
 async function loadExistingLeads() {
   try {
     return JSON.parse(await fs.readFile(leadsPath, "utf8"));
@@ -439,8 +502,9 @@ async function loadExistingLeads() {
 async function collectLeads() {
   const found = [];
   const errors = [];
-  for (const profile of searchProfiles) {
+  for (const profile of allSearchProfiles) {
     for (const source of publicSources) {
+      if (profile.sources && !profile.sources.includes(source.name)) continue;
       const url = source.url(profile.query, profile);
       try {
         const text = await fetchText(url);
@@ -455,7 +519,7 @@ async function collectLeads() {
 }
 
 await fs.mkdir(dataDir, { recursive: true });
-const existing = await loadExistingLeads();
+const existing = (await loadExistingLeads()).filter(existingLeadStillValid);
 const byId = new Map(existing.map((lead) => [lead.id, lead]));
 const { found, errors } = await collectLeads();
 

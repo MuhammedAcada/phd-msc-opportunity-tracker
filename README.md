@@ -25,6 +25,14 @@ This folder contains a practical, account-safe workflow for finding PhD/MSc oppo
 - 60-79: Medium priority. Review lab page before deciding.
 - Below 60: Low priority or archive.
 
+## Regional Expansion
+
+The tracker includes South Korea and Japan targets for medicinal chemistry, drug discovery, pharmaceutical sciences, health informatics, digital health, and AI for health.
+
+South Korea priority searches currently include Seoul National University, KAIST, Yonsei University, Korea University, POSTECH, Sungkyunkwan University, Hanyang University, UNIST, GIST, and Kyung Hee University.
+
+Japan priority searches currently include the University of Tokyo, Kyoto University, Osaka University, Tohoku University, Nagoya University, Kyushu University, Hokkaido University, University of Tsukuba, Institute of Science Tokyo, and Okinawa Institute of Science and Technology.
+
 ## LinkedIn Safety Rule
 
 Do not automate LinkedIn scraping, bulk profile extraction, or automated messaging. Keep LinkedIn human-in-the-loop: search manually, choose leads manually, then paste selected URLs into the tracker.

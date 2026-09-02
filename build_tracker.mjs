@@ -15,6 +15,33 @@ try {
   automatedLeads = [];
 }
 
+const targetedLinkedInSchools = [
+  "University of Oxford",
+  "University of Cambridge",
+  "University of Toronto",
+  "University of Michigan",
+  "Seoul National University",
+  "KAIST",
+  "Yonsei University",
+  "Korea University",
+  "POSTECH",
+  "Sungkyunkwan University",
+  "Hanyang University",
+  "Ulsan National Institute of Science and Technology",
+  "GIST",
+  "Kyung Hee University",
+  "University of Tokyo",
+  "Kyoto University",
+  "Osaka University",
+  "Tohoku University",
+  "Nagoya University",
+  "Kyushu University",
+  "Hokkaido University",
+  "University of Tsukuba",
+  "Institute of Science Tokyo",
+  "Okinawa Institute of Science and Technology",
+];
+
 const linkedinSearches = [
   {
     category: "Posts",
@@ -100,18 +127,18 @@ const linkedinSearches = [
     query:
       '("PhD student" OR "Doctoral student") AND ("health informatics" OR "digital health" OR "AI for health" OR "biomedical informatics")',
   },
-  ...["University of Oxford", "University of Cambridge", "University of Toronto", "University of Michigan"].flatMap((school) => [
+  ...targetedLinkedInSchools.flatMap((school) => [
     {
       category: "Posts",
       name: `${school} - Drug Discovery`,
       cadence: "Twice weekly",
-      query: `("${school}") AND ("PhD position" OR "DPhil" OR "PhD studentship" OR "graduate student") AND ("medicinal chemistry" OR "computational chemistry" OR "chemical biology" OR "drug discovery")`,
+      query: `("${school}") AND ("PhD position" OR "DPhil" OR "PhD studentship" OR "doctoral" OR "graduate student") AND ("medicinal chemistry" OR "computational chemistry" OR "chemical biology" OR "drug discovery" OR "pharmaceutical sciences")`,
     },
     {
       category: "Posts",
       name: `${school} - Health Informatics`,
       cadence: "Twice weekly",
-      query: `("${school}") AND ("health informatics" OR "digital health" OR "AI for health" OR "health data") AND ("PhD" OR "DPhil" OR "MSc" OR "MPhil")`,
+      query: `("${school}") AND ("health informatics" OR "digital health" OR "AI for health" OR "health data" OR "medical AI" OR "biomedical informatics") AND ("PhD" OR "DPhil" OR "MSc" OR "MPhil" OR "doctoral")`,
     },
   ]),
 ];

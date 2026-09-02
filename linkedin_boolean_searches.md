@@ -96,6 +96,30 @@ LinkedIn supports uppercase `AND`, `OR`, `NOT`, exact phrases in `"quotes"`, and
 ("University of Cambridge" OR Cambridge) AND ("health informatics" OR "digital health" OR "AI for health" OR "health data") AND ("PhD" OR "MPhil" OR studentship)
 ```
 
+### South Korea - Drug Discovery / Pharmacy
+
+```text
+("Seoul National University" OR KAIST OR "Yonsei University" OR "Korea University" OR POSTECH OR "Sungkyunkwan University" OR "Hanyang University" OR GIST) AND ("PhD" OR "doctoral" OR "graduate student" OR "research assistant") AND ("medicinal chemistry" OR "drug discovery" OR "pharmaceutical sciences" OR pharmacology)
+```
+
+### South Korea - Health Informatics / AI Health
+
+```text
+("Seoul National University" OR KAIST OR "Yonsei University" OR "Korea University" OR POSTECH OR "Sungkyunkwan University" OR "Ulsan National Institute of Science and Technology" OR UNIST) AND ("PhD" OR "doctoral" OR "graduate student") AND ("health informatics" OR "digital health" OR "AI for health" OR "health data" OR "medical AI")
+```
+
+### Japan - Drug Discovery / Pharmacy
+
+```text
+("University of Tokyo" OR "Kyoto University" OR "Osaka University" OR "Tohoku University" OR "Nagoya University" OR "Kyushu University" OR "Hokkaido University" OR "University of Tsukuba" OR "Institute of Science Tokyo" OR OIST) AND ("PhD" OR "doctoral" OR "graduate student" OR "research assistant") AND ("medicinal chemistry" OR "drug discovery" OR "pharmaceutical sciences" OR pharmacology)
+```
+
+### Japan - Health Informatics / AI Health
+
+```text
+("University of Tokyo" OR "Kyoto University" OR "Osaka University" OR "Tohoku University" OR "Nagoya University" OR "Kyushu University" OR "Hokkaido University" OR "University of Tsukuba" OR "Institute of Science Tokyo" OR OIST) AND ("PhD" OR "doctoral" OR "graduate student") AND ("health informatics" OR "digital health" OR "AI for health" OR "health data" OR "medical AI" OR "biomedical informatics")
+```
+
 ## Professor / Lab Discovery - People
 
 Use these in **People** search, then add school filters manually.
@@ -156,6 +180,16 @@ Use **People** search and filter by school.
 (Nigeria OR Nigerian OR Africa OR African) AND ("PhD student" OR "MSc student" OR "graduate student") AND ("medicinal chemistry" OR "drug discovery" OR "health informatics" OR "digital health")
 ```
 
+### Students in South Korea / Japan
+
+```text
+("PhD student" OR "Doctoral student" OR "MSc student" OR "Master's student" OR "graduate student") AND (Korea OR Korean OR Japan OR Japanese) AND ("medicinal chemistry" OR "drug discovery" OR "pharmaceutical sciences" OR "health informatics" OR "digital health" OR "AI for health")
+```
+
+```text
+("PhD student" OR "Doctoral student" OR "graduate student") AND ("Seoul National University" OR KAIST OR "University of Tokyo" OR "Kyoto University" OR "Osaka University" OR OIST) AND ("drug discovery" OR "health informatics" OR "medical AI" OR "pharmaceutical sciences")
+```
+
 ## Search Rotation
 
 Run these manually every day:
@@ -173,6 +207,7 @@ Run these twice weekly:
 2. Posts: Computational Drug Discovery
 3. Posts: AI for Health / Health Data Engineering
 4. Posts: Targeted University Searches
+5. Posts: South Korea / Japan targeted searches
 
 ## Manual Capture Rule
 
